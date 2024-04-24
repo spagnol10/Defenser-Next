@@ -6,7 +6,6 @@ import { Drawer } from "@components/Drawer"
 import { TextField } from "@components/inputFields/TextField"
 import { useLayoutContext } from "@context/LayoutContext"
 import { useUserContext } from "@context/userContext"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import Image from "next/image"
@@ -14,7 +13,6 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import Cookies from "universal-cookie"
-import { schema } from "./schema"
 
 type FormValues = {
   login: string
@@ -24,7 +22,6 @@ type FormValues = {
 const Login = () => {
   const cookies = new Cookies()
   const { register, control, handleSubmit } = useForm<FormValues>({
-    resolver: zodResolver(schema),
   })
   const { setToast } = useLayoutContext()
   const router = useRouter()
@@ -87,7 +84,7 @@ const Login = () => {
         <section className=" flex h-full w-full items-center justify-center overflow-visible rounded-b-[50%] bg-primary-30 text-center align-text-top">
           <h1 className="text-3xl font-bold text-primary-0">
             Olá, seja bem-vindo
-            <br /> somos a Defenser!
+            <br /> somos ao Finance !
           </h1>
         </section>
 
@@ -131,8 +128,8 @@ const Login = () => {
           >
             <TextField
               readOnly={readOnly}
-              type={"number"}
-              placeholder={"Digite seu CPF"}
+              type={"email"}
+              placeholder={"Digite seu Email"}
               {...register("login")}
               control={control}
               autoComplete="username"
@@ -148,6 +145,10 @@ const Login = () => {
 
             <Button loading={isLoading} disabled={isLoading} type="submit">
               Acessar
+            </Button>
+            
+            <Button loading={isLoading} disabled={isLoading} type="submit">
+              Criar uma conta
             </Button>
           </form>
         </Drawer>
